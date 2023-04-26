@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios'
 import dayjs from 'dayjs'
-import FormData from 'form-data'
+import FormData from '../form_data'
 
 import { DEFAULT_UA } from '../default'
 import proxyAgent, { ProxyConfig } from '../proxy_config'

@@ -28,10 +28,10 @@ jobs:
           yarn install
       - name: Build
         run: |
-          yarn workspace megalodon run build
+          yarn workspace @mashirozx/megalodon run build
       - name: Testing
         run: |
-          yarn workspace megalodon run test
+          yarn workspace @mashirozx/megalodon run test
       - name: Browser example
         run: |
           yarn workspace browser run build

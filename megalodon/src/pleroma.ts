@@ -1,5 +1,5 @@
 import { OAuth2 } from 'oauth'
-import FormData from 'form-data'
+import FormData from './form_data'
 
 import PleromaAPI from './pleroma/api_client'
 import WebSocket from './pleroma/web_socket'

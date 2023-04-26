@@ -1,5 +1,5 @@
 import { OAuth2 } from 'oauth'
-import FormData from 'form-data'
+import FormData from './form_data'
 import parseLinkHeader from 'parse-link-header'
 
 import FriendicaAPI from './friendica/api_client'

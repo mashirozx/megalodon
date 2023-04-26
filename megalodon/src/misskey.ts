@@ -1,4 +1,4 @@
-import FormData from 'form-data'
+import FormData from './form_data'
 
 import MisskeyAPI from './misskey/api_client'
 import { DEFAULT_UA } from './default'
@@ -1301,9 +1301,9 @@ export default class Misskey implements MegalodonInterface {
     const formData = new FormData()
     formData.append('file', file)
     let headers: { [key: string]: string } = {}
-    if (typeof formData.getHeaders === 'function') {
-      headers = formData.getHeaders()
-    }
+    // if (typeof formData.getHeaders === 'function') {
+    //   headers = formData.getHeaders()
+    // }
     return this.client
       .post<MisskeyAPI.Entity.File>('/api/drive/files/create', formData, headers)
       .then(res => ({ ...res, data: MisskeyAPI.Converter.file(res.data) }))
