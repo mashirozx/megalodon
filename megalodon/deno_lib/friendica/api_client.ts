@@ -1,18 +1,17 @@
-import axios, { AxiosResponse, AxiosRequestConfig } from 'axios'
-import objectAssignDeep from 'object-assign-deep'
+import axios, { AxiosResponse, AxiosRequestConfig } from 'npm:axios@1.3.6'
+import objectAssignDeep from 'npm:object-assign-deep@0.4.0'
 
-import WebSocket from './web_socket'
-import Response from '../response'
-import { RequestCanceledError } from '../cancel'
-import proxyAgent, { ProxyConfig } from '../proxy_config'
-import { NO_REDIRECT, DEFAULT_SCOPE, DEFAULT_UA } from '../default'
-import MastodonEntity from './entity'
-import MegalodonEntity from '../entity'
-import NotificationType from '../notification'
-import MastodonNotificationType from './notification'
-import { postForm } from '../post_form'
+import WebSocket from './web_socket.ts'
+import Response from '../response.ts'
+import { RequestCanceledError } from '../cancel.ts'
+import proxyAgent, { ProxyConfig } from '../proxy_config.ts'
+import { NO_REDIRECT, DEFAULT_SCOPE, DEFAULT_UA } from '../default.ts'
+import FriendicaEntity from './entity.ts'
+import MegalodonEntity from '../entity.ts'
+import NotificationType from '../notification.ts'
+import FriendicaNotificationType from './notification.ts'
 
-namespace MastodonAPI {
+namespace FriendicaAPI {
   /**
    * Interface
    */
@@ -30,7 +29,7 @@ namespace MastodonAPI {
   }
 
   /**
-   * Mastodon API client.
+   * Friendica API client.
    *
    * Using axios for request, you will handle promises.
    */
@@ -357,7 +356,7 @@ namespace MastodonAPI {
           httpsAgent: proxyAgent(this.proxyConfig)
         })
       }
-      return postForm<T>(this.baseUrl + path, params, options).then((resp: AxiosResponse<T>) => {
+      return axios.postForm<T>(this.baseUrl + path, params, options).then((resp: AxiosResponse<T>) => {
         const res: Response<T> = {
           data: resp.data,
           status: resp.status,
@@ -443,84 +442,85 @@ namespace MastodonAPI {
   }
 
   export namespace Entity {
-    export type Account = MastodonEntity.Account
-    export type Activity = MastodonEntity.Activity
-    export type Application = MastodonEntity.Application
-    export type AsyncAttachment = MegalodonEntity.AsyncAttachment
-    export type Attachment = MastodonEntity.Attachment
-    export type Card = MastodonEntity.Card
-    export type Context = MastodonEntity.Context
-    export type Conversation = MastodonEntity.Conversation
-    export type Emoji = MastodonEntity.Emoji
-    export type FeaturedTag = MastodonEntity.FeaturedTag
-    export type Field = MastodonEntity.Field
-    export type Filter = MastodonEntity.Filter
-    export type History = MastodonEntity.History
-    export type IdentityProof = MastodonEntity.IdentityProof
-    export type Instance = MastodonEntity.Instance
-    export type List = MastodonEntity.List
-    export type Marker = MastodonEntity.Marker
-    export type Mention = MastodonEntity.Mention
-    export type Notification = MastodonEntity.Notification
-    export type Poll = MastodonEntity.Poll
-    export type PollOption = MastodonEntity.PollOption
-    export type Preferences = MastodonEntity.Preferences
-    export type PushSubscription = MastodonEntity.PushSubscription
-    export type Relationship = MastodonEntity.Relationship
-    export type Report = MastodonEntity.Report
-    export type Results = MastodonEntity.Results
-    export type ScheduledStatus = MastodonEntity.ScheduledStatus
-    export type Source = MastodonEntity.Source
-    export type Stats = MastodonEntity.Stats
-    export type Status = MastodonEntity.Status
-    export type StatusParams = MastodonEntity.StatusParams
-    export type StatusSource = MastodonEntity.StatusSource
-    export type Tag = MastodonEntity.Tag
-    export type Token = MastodonEntity.Token
-    export type URLs = MastodonEntity.URLs
+    export type Account = FriendicaEntity.Account
+    export type Activity = FriendicaEntity.Activity
+    export type Application = FriendicaEntity.Application
+    export type AsyncAttachment = FriendicaEntity.AsyncAttachment
+    export type Attachment = FriendicaEntity.Attachment
+    export type Card = FriendicaEntity.Card
+    export type Context = FriendicaEntity.Context
+    export type Conversation = FriendicaEntity.Conversation
+    export type Emoji = FriendicaEntity.Emoji
+    export type FeaturedTag = FriendicaEntity.FeaturedTag
+    export type Field = FriendicaEntity.Field
+    export type Filter = FriendicaEntity.Filter
+    export type FollowRequest = FriendicaEntity.FollowRequest
+    export type History = FriendicaEntity.History
+    export type IdentityProof = FriendicaEntity.IdentityProof
+    export type Instance = FriendicaEntity.Instance
+    export type List = FriendicaEntity.List
+    export type Marker = FriendicaEntity.Marker
+    export type Mention = FriendicaEntity.Mention
+    export type Notification = FriendicaEntity.Notification
+    export type Poll = FriendicaEntity.Poll
+    export type PollOption = FriendicaEntity.PollOption
+    export type Preferences = FriendicaEntity.Preferences
+    export type PushSubscription = FriendicaEntity.PushSubscription
+    export type Relationship = FriendicaEntity.Relationship
+    export type Report = FriendicaEntity.Report
+    export type Results = FriendicaEntity.Results
+    export type ScheduledStatus = FriendicaEntity.ScheduledStatus
+    export type Source = FriendicaEntity.Source
+    export type Stats = FriendicaEntity.Stats
+    export type Status = FriendicaEntity.Status
+    export type StatusParams = FriendicaEntity.StatusParams
+    export type StatusSource = FriendicaEntity.StatusSource
+    export type Tag = FriendicaEntity.Tag
+    export type Token = FriendicaEntity.Token
+    export type URLs = FriendicaEntity.URLs
   }
 
   export namespace Converter {
-    export const encodeNotificationType = (t: MegalodonEntity.NotificationType): MastodonEntity.NotificationType => {
+    export const encodeNotificationType = (t: MegalodonEntity.NotificationType): FriendicaEntity.NotificationType => {
       switch (t) {
         case NotificationType.Follow:
-          return MastodonNotificationType.Follow
+          return FriendicaNotificationType.Follow
         case NotificationType.Favourite:
-          return MastodonNotificationType.Favourite
+          return FriendicaNotificationType.Favourite
         case NotificationType.Reblog:
-          return MastodonNotificationType.Reblog
+          return FriendicaNotificationType.Reblog
         case NotificationType.Mention:
-          return MastodonNotificationType.Mention
+          return FriendicaNotificationType.Mention
         case NotificationType.FollowRequest:
-          return MastodonNotificationType.FollowRequest
+          return FriendicaNotificationType.FollowRequest
         case NotificationType.Status:
-          return MastodonNotificationType.Status
+          return FriendicaNotificationType.Status
         case NotificationType.PollExpired:
-          return MastodonNotificationType.Poll
+          return FriendicaNotificationType.Poll
         case NotificationType.Update:
-          return MastodonNotificationType.Update
+          return FriendicaNotificationType.Update
         default:
           return t
       }
     }
 
-    export const decodeNotificationType = (t: MastodonEntity.NotificationType): MegalodonEntity.NotificationType => {
+    export const decodeNotificationType = (t: FriendicaEntity.NotificationType): MegalodonEntity.NotificationType => {
       switch (t) {
-        case MastodonNotificationType.Follow:
+        case FriendicaNotificationType.Follow:
           return NotificationType.Follow
-        case MastodonNotificationType.Favourite:
+        case FriendicaNotificationType.Favourite:
           return NotificationType.Favourite
-        case MastodonNotificationType.Mention:
+        case FriendicaNotificationType.Mention:
           return NotificationType.Mention
-        case MastodonNotificationType.Reblog:
+        case FriendicaNotificationType.Reblog:
           return NotificationType.Reblog
-        case MastodonNotificationType.FollowRequest:
+        case FriendicaNotificationType.FollowRequest:
           return NotificationType.FollowRequest
-        case MastodonNotificationType.Status:
+        case FriendicaNotificationType.Status:
           return NotificationType.Status
-        case MastodonNotificationType.Poll:
+        case FriendicaNotificationType.Poll:
           return NotificationType.PollExpired
-        case MastodonNotificationType.Update:
+        case FriendicaNotificationType.Update:
           return NotificationType.Update
         default:
           return t
@@ -536,7 +536,7 @@ namespace MastodonAPI {
         return {
           id: a.id,
           type: a.type,
-          url: a.url!,
+          url: a.url,
           remote_url: a.remote_url,
           preview_url: a.preview_url,
           text_url: a.text_url,
@@ -563,9 +563,32 @@ namespace MastodonAPI {
     export const featured_tag = (e: Entity.FeaturedTag): MegalodonEntity.FeaturedTag => e
     export const field = (f: Entity.Field): MegalodonEntity.Field => f
     export const filter = (f: Entity.Filter): MegalodonEntity.Filter => f
+    export const follow_request = (f: Entity.FollowRequest): MegalodonEntity.FollowRequest => f
     export const history = (h: Entity.History): MegalodonEntity.History => h
     export const identity_proof = (i: Entity.IdentityProof): MegalodonEntity.IdentityProof => i
-    export const instance = (i: Entity.Instance): MegalodonEntity.Instance => i
+    export const instance = (i: Entity.Instance): MegalodonEntity.Instance => {
+      return {
+        uri: i.uri,
+        title: i.title,
+        description: i.description,
+        email: i.email,
+        version: i.version,
+        thumbnail: i.thumbnail,
+        urls: i.urls ? urls(i.urls) : null,
+        stats: stats(i.stats),
+        languages: i.languages,
+        registrations: i.registrations,
+        approval_required: i.approval_required,
+        invites_enabled: i.invites_enabled,
+        configuration: {
+          statuses: {
+            max_characters: i.max_toot_chars
+          }
+        },
+        contact_account: account(i.contact_account),
+        rules: i.rules
+      }
+    }
     export const list = (l: Entity.List): MegalodonEntity.List => l
     export const marker = (m: Entity.Marker): MegalodonEntity.Marker => m
     export const mention = (m: Entity.Mention): MegalodonEntity.Mention => m
@@ -642,4 +665,4 @@ namespace MastodonAPI {
     export const urls = (u: Entity.URLs): MegalodonEntity.URLs => u
   }
 }
-export default MastodonAPI
+export default FriendicaAPI

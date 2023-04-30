@@ -3,7 +3,6 @@
 /** @type { import('denoify/lib/config/parseParams').DenoifyParams } */
 const config = {
 	"ports": {
-		"axios": "https://deno.land/x/axiod/mod.ts"
 	},
  }
  

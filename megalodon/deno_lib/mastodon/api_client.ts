@@ -1,16 +1,16 @@
-import axios, { AxiosResponse, AxiosRequestConfig } from 'axios'
-import objectAssignDeep from 'object-assign-deep'
+import axios, { AxiosResponse, AxiosRequestConfig } from 'npm:axios@1.3.6'
+import objectAssignDeep from 'npm:object-assign-deep@0.4.0'
 
-import WebSocket from './web_socket'
-import Response from '../response'
-import { RequestCanceledError } from '../cancel'
-import proxyAgent, { ProxyConfig } from '../proxy_config'
-import { NO_REDIRECT, DEFAULT_SCOPE, DEFAULT_UA } from '../default'
-import MastodonEntity from './entity'
-import MegalodonEntity from '../entity'
-import NotificationType from '../notification'
-import MastodonNotificationType from './notification'
-import { postForm } from '../post_form'
+import WebSocket from './web_socket.ts'
+import Response from '../response.ts'
+import { RequestCanceledError } from '../cancel.ts'
+import proxyAgent, { ProxyConfig } from '../proxy_config.ts'
+import { NO_REDIRECT, DEFAULT_SCOPE, DEFAULT_UA } from '../default.ts'
+import MastodonEntity from './entity.ts'
+import MegalodonEntity from '../entity.ts'
+import NotificationType from '../notification.ts'
+import MastodonNotificationType from './notification.ts'
+import { postForm } from '../post_form.ts'
 
 namespace MastodonAPI {
   /**

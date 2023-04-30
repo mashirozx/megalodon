@@ -1,5 +1,2 @@
-import FormDataPolyfill from 'form-data'
-
-const FormData = global.FormData || FormDataPolyfill
-
+import FormData from 'form-data'
 export default FormData
