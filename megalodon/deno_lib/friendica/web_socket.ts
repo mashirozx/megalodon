@@ -1,6 +1,6 @@
 import { WebSocketInterface } from '../megalodon.ts'
 import { EventEmitter } from 'node:events'
-import { ProxyConfig } from 'node:@/proxy_config'
+import { ProxyConfig } from '../proxy_config.ts'
 
 export default class WebSocket extends EventEmitter implements WebSocketInterface {
   constructor(
